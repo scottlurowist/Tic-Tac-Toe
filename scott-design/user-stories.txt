@@ -1,0 +1,13 @@
+As a User I want to sign up so that I may play tic-tac-toe.
+
+As a User I want to sign in once I have created an account so that I may play tic-tac-toe.
+
+As a signed in User I want to change my password so that I can ensure that my account is secure.
+
+As a signed in User I want to sign out from the app so that my session is closed. 
+
+As a signed in user I want to be able to start a new game so that I can play tic-tac-toe.
+
+As a player I want to be notified on-screen when I win, lose, or tie so that I have conclusion to a game.
+
+As a player who just finished a game, I want to be able to start a new game so that I can play tic-tac-toe again.
