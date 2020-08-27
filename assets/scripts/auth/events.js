@@ -9,12 +9,19 @@
 
 
 const getFormFields = require('./../../../lib/get-form-fields');
+const api = require('./api');
+const ui = require('./apiPromiseHandlers');
 
 
 // Hadn
 const onNavigateoToSignUpPage = event => {
 
-    alert('Not yet implemented...')
+    // Our pseudo-state machine toggles views from the home page
+    // to the create account page.
+    $('#home-page').hide();
+    $('#sign-up-page-form').show();
+
+
 }
 
 
@@ -24,7 +31,26 @@ const onNavigateToSignInPage = event => {
 }
 
 
+const onSignUp = event => {
+
+    event.preventDefault();
+
+    const form = event.target;
+
+    // send data in AJAX request to the API
+    api.signUp(getFormFields(form))
+
+      // handle successul response
+      .then(ui.onSignUpSuccess)
+      
+      // handle failed response
+      .catch(ui.onSignUpFailure);
+}
+
+
+
 module.exports = {
     onNavigateoToSignUpPage: onNavigateoToSignUpPage,
-    onNavigateToSignInPage: onNavigateToSignInPage
+    onNavigateToSignInPage: onNavigateToSignInPage,
+    onSignUp: onSignUp
 }
