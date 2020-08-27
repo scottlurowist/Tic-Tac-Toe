@@ -1,0 +1,8 @@
+
+- EMAIL="scottlurowist@gmail.com" PASSWORD="foo" sh curl-scripts/auth/tic-tac-toe-sign-up.sh
+
+- EMAIL="scottlurowist@gmail.com" PASSWORD="foo" sh curl-scripts/auth/tic-tac-toe-sign-in.sh
+
+- TOKEN=04cc8354ca78a4f94a58fcd3792758ab sh curl-scripts/auth-tic-tac-toe-sign-out.sh
+
+- TOKEN=8a3b063f9b0f3750dd6c6096d4937d50 OLD="bar" NEW="foo" sh curl-scripts/auth/tic-tac-toe-change-password.sh
