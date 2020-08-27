@@ -1,1 +1,61 @@
 @import '~bootstrap/scss/bootstrap';
+//@import './variables.scss'
+
+// I am havign a bizarre error defining this in variables.scss. I'll solve that 
+// issue later.
+$minMobileDeviceWidthInPixels: 360px;
+
+* {
+    box-sizing: border-box;
+}
+
+
+h1 {
+    text-align: center;
+}
+
+
+// Mobile devices
+@media (max-width: $minMobileDeviceWidthInPixels) {
+
+    #homepage__img--placeholder {
+
+        background-color: black;
+        height: 375px;
+        margin: 0 auto;
+        width: 70%;
+    }
+
+    nav {
+        display: flex;
+        flex-direction: column;
+        flex-wrap: nowrap;
+        justify-content: space-evenly;
+    }
+}
+
+
+// Desktop
+@media (min-width: $minMobileDeviceWidthInPixels + 1) {
+
+    #homepage__img--placeholder {
+
+        background-color: black;
+        height: 375px;
+        margin: 0 auto;
+        width: 70%;
+    }
+
+    nav {
+        display: flex;
+        flex-direction: row;
+        flex-wrap: nowrap;
+        justify-content: space-evenly;
+
+        button {
+
+            margin-top: 20px;
+        }
+    }
+    
+}

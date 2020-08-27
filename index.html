@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
     <head>
-      <title>Example</title>
+      <title>Tic-Tac-Toe</title>
       <meta name="viewport" content="width=device-width, initial-scale=1">
 
       <!-- Do not add `link` tags-->
@@ -12,6 +12,28 @@
       <script src="public/application.js" type="text/javascript" charset="utf-8" defer></script>
     </head>
     <body>
-      <h1>Browser Template</h1>
+
+      <main>
+        <header>
+          <h1>Tic-Tac-Toe</h1>
+        </header>
+
+        <!-- This section will only be shown when in the initial landing state. -->
+        <section id="home-page">
+
+          <div id="homepage__img--placeholder">
+            <!-- This is a temporary place holder for an image of a tic tac toe
+                 board. -->
+            <!-- <img src="" width="80%" height="80%"> -->
+          </div>
+
+          <nav>
+            <input type="button" id="home-page-create-account-button" 
+                   class="btn-primary" value="Create Account">
+            <input type="button" id="home-page-sign-in-button"
+                   class="btn-primary" value="Sign In">
+          </nav>
+        </section>
+      </main>
     </body>
 </html>
