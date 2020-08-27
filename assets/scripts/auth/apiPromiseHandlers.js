@@ -30,6 +30,9 @@ const onSignInSuccess = function(response) {
 
   store.user = response.user;
   $('#status-notification-message-area').text('Welcome ' + response.user.email);
+
+  $('#sign-in-page-form').hide();
+  $('#game-options-page-form').show();  
 };
 
 // Processes the success promise failure result when a user attempts to create an account.
