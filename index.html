@@ -93,6 +93,35 @@
             </form>
           </div>
         </section>
+
+        <!-- This section is only shown after the user successfully signs into
+             the application. From here they can view game history, start a new
+             game, change their password, or exit the app. -->
+        <section id="game-options-page">
+          <div id="game-options-page-form-div">
+            <form id="game-options-page-form" class="form">
+              <fieldset>
+                <legend>Game Options</legend>
+                <div class="form-group">
+                  <input id="game-history-button" class="btn btn-primary"
+                         type="button" value="View Game History">                                
+                </div>
+                <div class="form-group">
+                  <input id="new-game-button" class="btn btn-primary"
+                         type="button" value="New Game"> 
+                </div>
+                <div class="form-group">
+                  <input id="change-password-button" class="btn btn-primary" 
+                         type="button" value="Change Password"> 
+                </div>    
+                <div class="form-group">
+                  <input id="exit-tic-tac-toe-app-button" class="btn btn-primary" 
+                         type="button" value="Exit Tic-Tac-Toe"> 
+                </div>                              
+              </fieldset>
+            </form>
+          </div>
+        </section>        
       </main>
     </body>
 </html>

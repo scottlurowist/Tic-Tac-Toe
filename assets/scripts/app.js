@@ -16,6 +16,7 @@ $(() => {
   // The state machine is implemented in ???.
   $('#sign-up-page-form').hide();
   $('#sign-in-page-form').hide();
+  $('#game-options-page-form').hide();
 
   // Handles the two buttons found on the home page to either create an account
   // or to sign into an existing account.
