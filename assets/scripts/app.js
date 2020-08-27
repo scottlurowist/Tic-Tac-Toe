@@ -15,6 +15,7 @@ $(() => {
   // we must hide sections of the page depending upon which state we are.
   // The state machine is implemented in ???.
   $('#sign-up-page-form').hide();
+  $('#sign-in-page-form').hide();
 
   // Handles the two buttons found on the home page to either create an account
   // or to sign into an existing account.
@@ -23,5 +24,10 @@ $(() => {
 
   // This handles the button click on the create account page.
   $('#sign-up-page-form').on('submit', authEvents.onSignUp);
+
+    // This handles the button click on the signin page.
+  $('#sign-in-page-form').on('submit', authEvents.onSignIn);
+
+
 
 })
