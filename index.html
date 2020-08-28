@@ -111,14 +111,42 @@
                          type="button" value="New Game"> 
                 </div>
                 <div class="form-group">
-                  <input id="change-password-button" class="btn btn-primary" 
-                         type="button" value="Change Password"> 
+                  <button id="change-password-button"
+                          class="btn btn-primary" 
+                          type="button">Change Password</button>   
                 </div>    
                 <div class="form-group">
                   <button id="exit-tic-tac-toe-app-button" 
                           class="btn btn-primary" 
-                          type="button">Exit Tic-Tac-Toe</button> 
+                          type="button">
+                    Exit Tic-Tac-Toe
+                  </button> 
                 </div>                              
+              </fieldset>
+            </form>
+          </div>
+        </section>    
+        
+        <!-- This section is only shown after the game options page and the 
+             user selects change password. -->
+        <section id="change-password-page">
+          <div id="change-password-page-form-div">
+            <form id="change-password-page-form" class="form">
+              <fieldset>
+                <legend>Change Password</legend>
+                <div class="form-group">
+                  <label for="old-password">Old Password</label>
+                  <input id="old-password" class="form-control" type="password"
+                         name="passwords[old]" placeholder="Old Password">
+                </div>
+                <div class="form-group">
+                  <label for="new-password">New Password</label>
+                  <input id="new-password" class="form-control"
+                         type="password" name="passwords[new]"
+                         placeholder="New Password">
+                </div>
+
+                <input type="submit" class="btn btn-primary" value="Change Password">
               </fieldset>
             </form>
           </div>

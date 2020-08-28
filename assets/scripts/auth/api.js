@@ -23,11 +23,25 @@ const signUp = function (data) {
 
 
 const signIn = function (data) {
+
     return $.ajax({
       url: config.apiUrl + '/sign-in',
       method: 'POST',
       data: data
     })
+}
+
+
+const changePassword = function(data) {
+
+  return $.ajax({
+    url: config.apiUrl + '/change-password',
+    headers: {
+      'Authorization': 'Bearer ' + store.user.token
+    },
+    method: 'PATCH',
+    data: data
+  })
 }
 
 
@@ -38,13 +52,15 @@ const exitApp = function (data) {
       'Content-Type': 'application/json',
       'Authorization': 'Bearer ' + store.user.token
     },
-    method: 'DELETE',
+    method: 'DELETE'
   })
 }
+
 
 module.exports = {
     
     signUp: signUp,
     signIn: signIn,
+    changePassword: changePassword,
     exitApp: exitApp
 }
