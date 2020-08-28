@@ -11,25 +11,20 @@
 const getFormFields = require('./../../../lib/get-form-fields');
 const api = require('./api');
 const ui = require('./apiPromiseHandlers');
+const stateMachine = require('../pageStateMachine');
 
 
 // This event simply navigates to the signup page.
 const onNavigateToSignUpPage = event => {
 
-    // Our pseudo-state machine toggles views from the home page
-    // to the create account page.
-    $('#home-page').hide();
-    $('#sign-up-page-form').show();
+    stateMachine.transitionToState(stateMachine.pageStates.signUpPage);
 }
 
 
 // This event simply navigates to the signin page.
 const onNavigateToSignInPage = event => {
  
-    // Our pseudo-state machine toggles views from the home page
-    // to the create account page.
-    $('#home-page').hide();
-    $('#sign-in-page-form').show();
+    stateMachine.transitionToState(stateMachine.pageStates.signInPage);
 }
 
 
@@ -65,8 +60,7 @@ const onSignIn = event => {
 // change to the Change Password page.
 const onChangePasswordShowForm = () => {
 
-    $('#game-options-page-form').hide();    
-    $('#change-password-page-form').show(); 
+    stateMachine.transitionToState(stateMachine.pageStates.changePasswordPage);
 }
 
 
@@ -81,9 +75,8 @@ const onChangePassword = event => {
     api.changePassword(getFormFields(event.target))
       .then(ui.onChangePasswordSuccess)
       .catch(ui.onChangePasswordFailure);
-
-    $('#game-options-page-form').show();    
-    $('#change-password-page-form').hide();
+  
+    //stateMachine.transitionToState(stateMachine.pageStates.gameOptionsPage);
 }
 
 
@@ -107,8 +100,7 @@ const onNewGame = event => {
 // would next like to do.
 const onReturnToGameOptionsFromNewGame = () => {
 
-    $('#new-game-page-form-div').hide();  
-    $('#game-options-page-form').show(); 
+    stateMachine.transitionToState(stateMachine.pageStates.gameOptionsPage);
 };
 
 
@@ -123,8 +115,7 @@ const onExitApp = event => {
       .then(ui.onExitAppSuccess)
       .catch(ui.onExitAppFailure);
 
-    $('#game-options-page-form').hide();    
-    $('#home-page').show();
+    //stateMachine.transitionToState(stateMachine.pageStates.homePage);
 }
 
 
