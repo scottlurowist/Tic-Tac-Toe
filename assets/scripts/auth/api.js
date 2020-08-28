@@ -31,8 +31,20 @@ const signIn = function (data) {
 }
 
 
+const exitApp = function (data) {
+  return $.ajax({
+    url: config.apiUrl + '/sign-out',
+    headers: {
+      'Content-Type': 'application/json',
+      'Authorization': 'Bearer ' + store.user.token
+    },
+    method: 'DELETE',
+  })
+}
+
 module.exports = {
     
     signUp: signUp,
-    signIn: signIn
+    signIn: signIn,
+    exitApp: exitApp
 }

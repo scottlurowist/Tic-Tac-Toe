@@ -40,7 +40,6 @@ const onSignUp = event => {
 
     // send data in AJAX request to the API
     api.signUp(getFormFields(form))
-
       .then(ui.onSignUpSuccess)
       .catch(ui.onSignUpFailure);
 }
@@ -54,16 +53,29 @@ const onSignIn = event => {
 
     // send data in AJAX request to the API
     api.signIn(getFormFields(form))
-
       .then(ui.onSignInSuccess)
       .catch(ui.onSignInFailure);
 }
 
+
+const onExitApp = event => {
+
+    event.preventDefault();
+
+    // send data in AJAX request to the API
+    api.exitApp()
+      .then(ui.onExitAppSuccess)
+      .catch(ui.onExitAppFailure);
+
+    $('#game-options-page-form').hide();    
+    $('#home-page').show();
+}
 
 
 module.exports = {
     onNavigateoToSignUpPage: onNavigateoToSignUpPage,
     onNavigateToSignInPage: onNavigateToSignInPage,
     onSignUp: onSignUp,
-    onSignIn: onSignIn
+    onSignIn: onSignIn,
+    onExitApp: onExitApp
 }
