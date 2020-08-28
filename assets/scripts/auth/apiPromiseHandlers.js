@@ -44,6 +44,26 @@ const onSignInFailure = function(response) {
 };
 
 
+// Processes the success promise success result when a user changes their password.
+const onChangePasswordSuccess = function(response) {
+
+  $('#status-notification-message-area')
+    .text('You have successfully changed your password ' + store.user.email);
+
+  $('#change-password-page-form').hide();
+  $('#game-options-page-form').show();    
+};
+
+
+// Processes the success promise failure result when a user attempts to change their
+// password.
+const onChangePasswordFailure = function(response) {
+
+    $('#status-notification-message-area')
+      .text('Password change failed. Please try again later.');
+};
+
+
 // Processes the success promise success result when a user exits the application.
 const onExitAppSuccess = function(response) {
 
@@ -69,6 +89,8 @@ module.exports = {
   onSignUpFailure,
   onSignInSuccess,
   onSignInFailure,
+  onChangePasswordSuccess,
+  onChangePasswordFailure,
   onExitAppSuccess,
   onExitAppFailure  
 };

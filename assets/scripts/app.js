@@ -17,6 +17,8 @@ $(() => {
   $('#sign-up-page-form').hide();
   $('#sign-in-page-form').hide();
   $('#game-options-page-form').hide();
+  $('#change-password-page-form').hide();
+
 
   // Handles the two buttons found on the home page to either create an account
   // or to sign into an existing account.
@@ -29,7 +31,15 @@ $(() => {
     // This handles the button click on the signin page.
   $('#sign-in-page-form').on('submit', authEvents.onSignIn);
 
+  // This handles the button click on the game options page for changing the 
+  // user's password.
+  $('#change-password-button').on('click', authEvents.onChangePasswordShowForm);
+
+  $('#change-password-page-form').on('submit', authEvents.onChangePassword);
+
   // This handles the button click on the game options page for exiting the 
   // application.
   $('#exit-tic-tac-toe-app-button').on('click', authEvents.onExitApp);
+
+
 })

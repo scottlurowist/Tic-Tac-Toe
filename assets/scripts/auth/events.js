@@ -58,8 +58,33 @@ const onSignIn = event => {
 }
 
 
-const onExitApp = event => {
+const onChangePasswordShowForm = event => {
 
+    //event.preventDefault();
+
+    $('#game-options-page-form').hide();    
+    $('#change-password-page-form').show(); 
+}
+
+
+const onChangePassword = event => {
+    
+    event.preventDefault();
+
+    const form = event.target;
+
+    // send data in AJAX request to the API
+    api.changePassword(getFormFields(form))
+      .then(ui.onChangePasswordSuccess)
+      .catch(ui.onChangePasswordFailure);
+
+    $('#game-options-page-form').show();    
+    $('#change-password-page-form').hide();
+}
+
+
+const onExitApp = event => {
+    console.log('Entering onExit');
     event.preventDefault();
 
     // send data in AJAX request to the API
@@ -77,5 +102,7 @@ module.exports = {
     onNavigateToSignInPage: onNavigateToSignInPage,
     onSignUp: onSignUp,
     onSignIn: onSignIn,
+    onChangePasswordShowForm: onChangePasswordShowForm,
+    onChangePassword: onChangePassword,
     onExitApp: onExitApp
 }
