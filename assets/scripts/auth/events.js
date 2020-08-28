@@ -13,8 +13,8 @@ const api = require('./api');
 const ui = require('./apiPromiseHandlers');
 
 
-// Hadn
-const onNavigateoToSignUpPage = event => {
+// This event simply navigates to the signup page.
+const onNavigateToSignUpPage = event => {
 
     // Our pseudo-state machine toggles views from the home page
     // to the create account page.
@@ -23,6 +23,7 @@ const onNavigateoToSignUpPage = event => {
 }
 
 
+// This event simply navigates to the signin page.
 const onNavigateToSignInPage = event => {
  
     // Our pseudo-state machine toggles views from the home page
@@ -32,49 +33,52 @@ const onNavigateToSignInPage = event => {
 }
 
 
+// This event is triggered when the user has requested to create an 
+// account in this application. It will invoke the web service that
+// creates a new user account.
 const onSignUp = event => {
 
     event.preventDefault();
 
-    const form = event.target;
-
-    // send data in AJAX request to the API
-    api.signUp(getFormFields(form))
+    api.signUp(getFormFields(event.target))
       .then(ui.onSignUpSuccess)
       .catch(ui.onSignUpFailure);
 }
 
 
+// This event is triggered when the user has requested to signin to
+// this application. It will invoke the web service that
+// signs the user into the application and returns a token used
+// for invoking further web services.
 const onSignIn = event => {
 
     event.preventDefault();
 
-    const form = event.target;
-
-    // send data in AJAX request to the API
-    api.signIn(getFormFields(form))
+    api.signIn(getFormFields(event.target))
       .then(ui.onSignInSuccess)
       .catch(ui.onSignInFailure);
 }
 
 
-const onChangePasswordShowForm = event => {
-
-    //event.preventDefault();
+// This event is invoked when the user clicks the "Change Password"
+// button on the "Game Options" page. It simply triggers a state
+// change to the Change Password page.
+const onChangePasswordShowForm = () => {
 
     $('#game-options-page-form').hide();    
     $('#change-password-page-form').show(); 
 }
 
 
+// This event is triggered when the user has requested to change
+// their password. It will invoke the web service that changes the
+// user's password. If successful, the user will be taken back to 
+// the Game Options page.
 const onChangePassword = event => {
     
     event.preventDefault();
 
-    const form = event.target;
-
-    // send data in AJAX request to the API
-    api.changePassword(getFormFields(form))
+    api.changePassword(getFormFields(event.target))
       .then(ui.onChangePasswordSuccess)
       .catch(ui.onChangePasswordFailure);
 
@@ -82,30 +86,39 @@ const onChangePassword = event => {
     $('#change-password-page-form').hide();
 }
 
+
+// This event is triggered when the user has requested to create
+// a new game. It will invoke the web service that creates a new
+// game. If successful, the user will be presented with a tic-tac-toe
+// board and can immediately start playing.
 const onNewGame = event => {
 
     event.preventDefault();
     
-    // send data in AJAX request to the API
     api.newGame()
         .then(ui.onNewGameSuccess)
         .catch(ui.onNewGameFailure);
 }
 
 
+// This event is triggered when the user has either won,
+// lost, or tied a game, and this will simply return the user to
+// the Game Options page. From there the user may select what they
+// would next like to do.
 const onReturnToGameOptionsFromNewGame = () => {
 
     $('#new-game-page-form-div').hide();  
     $('#game-options-page-form').show(); 
-   
 };
 
 
+// This event is triggered when the user has clicked the
+// "Exit Tic-Tac-Toe" button in the Game Options page. This will exit the user
+// from the application and return them to the home page for the app.
 const onExitApp = event => {
     console.log('Entering onExit');
     event.preventDefault();
 
-    // send data in AJAX request to the API
     api.exitApp()
       .then(ui.onExitAppSuccess)
       .catch(ui.onExitAppFailure);
@@ -116,7 +129,7 @@ const onExitApp = event => {
 
 
 module.exports = {
-    onNavigateoToSignUpPage: onNavigateoToSignUpPage,
+    onNavigateToSignUpPage: onNavigateToSignUpPage,
     onNavigateToSignInPage: onNavigateToSignInPage,
     onSignUp: onSignUp,
     onSignIn: onSignIn,
