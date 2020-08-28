@@ -10,6 +10,7 @@
 
 
 const store = require('../store');
+const stateMachine = require('../pageStateMachine');
 
 
 // Processes the success promise success result when a user creates an account.
@@ -18,8 +19,7 @@ const onSignUpSuccess = response => {
   $('#status-notification-message-area').text('You are now registered ' +
     response.user.email);
 
-  $('#sign-up-page-form').hide();
-  $('#sign-in-page-form').show();
+  stateMachine.transitionToState(stateMachine.pageStates.signInPage);
 };
 
 
@@ -40,8 +40,7 @@ const onSignInSuccess = response => {
 
   $('#status-notification-message-area').text('Welcome ' + response.user.email);
 
-  $('#sign-in-page-form').hide();
-  $('#game-options-page-form').show();  
+  stateMachine.transitionToState(stateMachine.pageStates.gameOptionsPage);  
 };
 
 
@@ -61,8 +60,7 @@ const onChangePasswordSuccess = response => {
     .text('You have successfully changed your password ' +
        store.user.email);
 
-  $('#change-password-page-form').hide();
-  $('#game-options-page-form').show();    
+  stateMachine.transitionToState(stateMachine.pageStates.gameOptionsPage);        
 };
 
 
@@ -83,8 +81,7 @@ const onNewGameSuccess = response => {
   $('#status-notification-message-area')
     .text('You have successfully created a new game ' + store.user.email);
 
-  $('#game-options-page-form').hide(); 
-  $('#new-game-page-form-div').show();   
+  stateMachine.transitionToState(stateMachine.pageStates.newGamePage);   
 };
 
 
@@ -103,9 +100,7 @@ const onExitAppSuccess = response => {
   $('#status-notification-message-area')
     .text('You have exited the app ' + store.user.email);
 
-  $('#sign-in-page-form').show();
-  $('#sign-in-page-form').hide();
-  $('#game-options-page-form').hide();    
+    stateMachine.transitionToState(stateMachine.pageStates.homePage);      
 };
 
 
