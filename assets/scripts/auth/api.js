@@ -13,6 +13,7 @@ const config = require('./../config')
 const store = require('../store')
 
 
+// Invokes the web service for the signup of a new account.
 const signUp = function (data) {
     return $.ajax({
       url: config.apiUrl + '/sign-up',
@@ -22,6 +23,7 @@ const signUp = function (data) {
 }
 
 
+// Invokes the web service for the signin of a current user.
 const signIn = function (data) {
 
     return $.ajax({
@@ -32,6 +34,8 @@ const signIn = function (data) {
 }
 
 
+// Invokes the web service for changing the password for a current user
+// who is curretnly active in the app. This requires a token to invoke.
 const changePassword = function(data) {
 
   return $.ajax({
@@ -45,6 +49,8 @@ const changePassword = function(data) {
 }
 
 
+// Invokes the web service for creating a new game for a current user
+// who is curretnly active in the app. This requires a token to invoke.
 const newGame = () => {
   return $.ajax({
     url: config.apiUrl + '/games',
@@ -56,11 +62,13 @@ const newGame = () => {
 }
 
 
+// Invokes the web service for exiting this application for a current user
+// who is curretnly active in the app. This requires a token to invoke so
+// that it can be removed from service.
 const exitApp = function (data) {
   return $.ajax({
     url: config.apiUrl + '/sign-out',
     headers: {
-      'Content-Type': 'application/json',
       'Authorization': 'Bearer ' + store.user.token
     },
     method: 'DELETE'
