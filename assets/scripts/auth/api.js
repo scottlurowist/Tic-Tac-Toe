@@ -45,6 +45,17 @@ const changePassword = function(data) {
 }
 
 
+const newGame = () => {
+  return $.ajax({
+    url: config.apiUrl + '/games',
+    headers: {
+      'Authorization': 'Bearer ' + store.user.token
+    },
+    method: 'POST'
+  })
+}
+
+
 const exitApp = function (data) {
   return $.ajax({
     url: config.apiUrl + '/sign-out',
@@ -62,5 +73,6 @@ module.exports = {
     signUp: signUp,
     signIn: signIn,
     changePassword: changePassword,
+    newGame: newGame,
     exitApp: exitApp
 }

@@ -1,0 +1,3 @@
+
+- TOKEN=9c61ce68c7af099d0574e648aa466245 sh curl-scripts/game/tic-tac-toe-create-new-game.sh
+

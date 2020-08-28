@@ -30,6 +30,7 @@ const onSignUpFailure = function(response) {
 const onSignInSuccess = function(response) {
 
   store.user = response.user;
+
   $('#status-notification-message-area').text('Welcome ' + response.user.email);
 
   $('#sign-in-page-form').hide();
@@ -64,6 +65,28 @@ const onChangePasswordFailure = function(response) {
 };
 
 
+// Processes the success promise success result when a user creates a new game.
+const onNewGameSuccess = function(response) {
+
+  store.currentGame = response.game;
+
+  $('#status-notification-message-area')
+    .text('You have successfully created a new game ' + store.user.email);
+
+  $('#game-options-page-form').hide(); 
+  $('#new-game-page-form-div').show();   
+};
+
+
+// Processes the success promise failure result when a user attempts to 
+// create a new game.
+const onNewGameFailure = function(response) {
+
+    $('#status-notification-message-area')
+      .text('Your attempt to create a new game failed. Please try again later.');
+};
+
+
 // Processes the success promise success result when a user exits the application.
 const onExitAppSuccess = function(response) {
 
@@ -91,6 +114,8 @@ module.exports = {
   onSignInFailure,
   onChangePasswordSuccess,
   onChangePasswordFailure,
+  onNewGameSuccess,
+  onNewGameFailure,
   onExitAppSuccess,
   onExitAppFailure  
 };

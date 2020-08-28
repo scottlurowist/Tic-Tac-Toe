@@ -18,6 +18,7 @@ $(() => {
   $('#sign-in-page-form').hide();
   $('#game-options-page-form').hide();
   $('#change-password-page-form').hide();
+  $('#new-game-page-form-div').hide();    
 
 
   // Handles the two buttons found on the home page to either create an account
@@ -36,6 +37,20 @@ $(() => {
   $('#change-password-button').on('click', authEvents.onChangePasswordShowForm);
 
   $('#change-password-page-form').on('submit', authEvents.onChangePassword);
+
+  $('#new-game-return-to-game-options')
+    .on('click', authEvents.onReturnToGameOptionsFromNewGame);
+
+  // This handles the button click on the game options page for creating a 
+  // new game.
+  $('#new-game-button').on('click', authEvents.onNewGame);
+
+
+
+
+
+
+
 
   // This handles the button click on the game options page for exiting the 
   // application.
