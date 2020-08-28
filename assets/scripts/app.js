@@ -29,6 +29,7 @@ $(() => {
     // This handles the button click on the signin page.
   $('#sign-in-page-form').on('submit', authEvents.onSignIn);
 
-
-
+  // This handles the button click on the game options page for exiting the 
+  // application.
+  $('#exit-tic-tac-toe-app-button').on('click', authEvents.onExitApp);
 })
