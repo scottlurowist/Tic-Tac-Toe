@@ -51,6 +51,8 @@ const privatePageStatesMap = {
 // initial state of the app to the home page.
 const initializeStateMachine = () => {
 
+    // Hide the main header since the SVG on the main page indicates that this is Tic Tac Toe.
+    
     // We need to call this as if we are outside of this module 
     // because we have to pass a string representing our initial state.
     transitionToState(pageStates.homePage);

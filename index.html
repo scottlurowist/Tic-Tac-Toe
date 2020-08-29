@@ -14,26 +14,27 @@
     <body>
 
       <main>
-        <header>
-          <h1>Tic-Tac-Toe</h1>
-        </header>
 
         <!-- This is where we notificy the user about the state of the app
              or any notifications that might interest the user. -->
-        <p id="status-notification-message-area"></p>
+        <p id="status-notification-message-area" class="text-light">
+          Welcome to Tic Tac Toe
+        </p>
 
         <!-- This section will only be shown when in the initial landing state. -->
         <section id="home-page">
-          <div id="homepage__img--placeholder">
-            <!-- This is a temporary place holder for an image of a tic tac toe
-                 board. -->
-            <!-- <img src="" width="80%" height="80%"> -->
+
+          <div class="img--placeholder">
+            <img src="./assets/images/TicTacToe_Ani_01.gif">
           </div>
+
           <nav>
-            <input type="button" id="home-page-create-account-button" 
-                   class="btn btn-primary" value="Create Account">
-            <input type="button" id="home-page-sign-in-button"
-                   class="btn btn-primary" value="Sign In">
+            <div>
+              <input type="button" id="home-page-create-account-button" 
+                     class="btn btn-primary" value="Create Account">
+              <input type="button" id="home-page-sign-in-button"
+                     class="btn btn-primary" value="Sign In">
+            </div>
           </nav>
         </section>
 
@@ -43,7 +44,7 @@
           <div id="create-account-page-form-div">
             <form id="sign-up-page-form" class="form">
               <fieldset>
-                <legend>Create An Account</legend>
+                <legend class="text-light">Create An Account</legend>
                 <div class="form-group">
                   <label for="sign-up-email">Email</label>
                   <input id="sign-up-email" class="form-control" type="email"
@@ -75,7 +76,7 @@
           <div id="sign-in-page-form-div">
             <form id="sign-in-page-form" class="form">
               <fieldset>
-                <legend>Sign In</legend>
+                <legend class="text-light">Sign In</legend>
                 <div class="form-group">
                   <label for="sign-in-email">Email</label>
                   <input id="sign-in-email" class="form-control" type="email"
@@ -98,30 +99,34 @@
              the application. From here they can view game history, start a new
              game, change their password, or exit the app. -->
         <section id="game-options-page">
+
           <div id="game-options-page-form-div">
             <form id="game-options-page-form" class="form">
               <fieldset>
-                <legend>Game Options</legend>
-                <div class="form-group">
-                  <input id="game-history-button" class="btn btn-primary"
-                         type="button" value="View Game History">                                
+                <div id="game-options_flex-column-div">
+                  <h3 class="text-light">Game Options</h3>
+
+                  <div class="form-group">
+                    <input id="game-history-button" class="btn btn-primary"
+                           type="button" value="View Game History">                                
+                  </div>
+                  <div class="form-group">
+                    <input id="new-game-button" class="btn btn-primary"
+                           type="button" value="New Game"> 
+                  </div>
+                  <div class="form-group">
+                    <button id="change-password-button"
+                            class="btn btn-primary" 
+                            type="button">Change Password</button>   
+                  </div>    
+                  <div class="form-group">
+                    <button id="exit-tic-tac-toe-app-button" 
+                            class="btn btn-primary" 
+                            type="button">
+                      Exit Tic-Tac-Toe
+                    </button> 
+                  </div>
                 </div>
-                <div class="form-group">
-                  <input id="new-game-button" class="btn btn-primary"
-                         type="button" value="New Game"> 
-                </div>
-                <div class="form-group">
-                  <button id="change-password-button"
-                          class="btn btn-primary" 
-                          type="button">Change Password</button>   
-                </div>    
-                <div class="form-group">
-                  <button id="exit-tic-tac-toe-app-button" 
-                          class="btn btn-primary" 
-                          type="button">
-                    Exit Tic-Tac-Toe
-                  </button> 
-                </div>                              
               </fieldset>
             </form>
           </div>
@@ -133,7 +138,7 @@
           <div id="change-password-page-form-div">
             <form id="change-password-page-form" class="form">
               <fieldset>
-                <legend>Change Password</legend>
+                <legend class="text-light">Change Password</legend>
                 <div class="form-group">
                   <label for="old-password">Old Password</label>
                   <input id="old-password" class="form-control" type="password"
@@ -156,8 +161,8 @@
              user selects a new game password. -->
         <section id="new-game-page">
           <div id="new-game-page-form-div">
-            <h3>New Game</h3>
-            
+
+            <!-- This is the game board. -->
             <div id="board-container" class="container">
               <div class=row>
                 <div class="col" id="gameboard-cell-0">
@@ -194,14 +199,16 @@
               </div>                            
             </div> <!-- id="board-container" --> 
 
-            <button id="new-game-return-to-game-options"
-                    type="button" class="btn btn-primary">
-              Return to Game Options
-            </button>
-            <button id="new-game-within-game-board-button"
-                    type="button" class="btn btn-primary">
-              New Game 
-            </button>            
+            <nav>
+              <button id="new-game-return-to-game-options"
+              type="button" class="btn btn-primary">
+                Return to Game Options
+              </button>
+              <button id="new-game-within-game-board-button"
+                      type="button" class="btn btn-primary">
+                New Game 
+              </button>  
+            </nav>
           </div>
         </section>            
       </main>

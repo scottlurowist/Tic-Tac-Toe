@@ -1,100 +1,210 @@
+
+
+@import './_variables.scss';
+
+// Override Bootstrap defaults.
+@import "~bootstrap/scss/functions";
+@import "~bootstrap/scss/variables";
+
+// Override the Boostrap primary color to a shade of purple.
+// This needs to be set first before loading Bootstrap.
+$theme-colors: (
+  primary: $accent-color
+);
+
 @import '~bootstrap/scss/bootstrap';
-//@import './variables.scss'
 
-
-// I am havign a bizarre error defining this in variables.scss. I'll solve that 
-// issue later.
-$maxMobileDeviceWidthInPixels: 320px;
 
 * {
     box-sizing: border-box;
 }
 
+html {
+    // Set this explicitly so that we can use REM units.
+    // 1 REM is 18 pixels.
+    font-size: 18px;
+}
 
-h1 {
+body {
+    background-color: $dark-theme-background;
+}
+
+label {
+    color: $accent-color-light;
+}
+
+#status-notification-message-area {
+    background-color: $accent-color;
+    border: .2rem solid $accent-color-light;
+    border-radius: 1rem;    
+    font-size: 1.25rem;
+    margin: 2rem auto 2rem auto;
+    padding: 1.1rem;
     text-align: center;
+    width: 50%;
 }
-
-#create-account-page-form-div {
-    
-    margin: 0 auto;   
-    width:60%
-}
-
 
 .container {
     margin: 0 auto;
 }
 
-
-
-// Mobile devices
-@media (max-width: $maxMobileDeviceWidthInPixels) {
-
-    #homepage__img--placeholder {
-
-        background-color: black;
-        height: 275px;
-        margin: 0 auto;
-        width: 70%;
-    }
-
-    nav {
-        display: flex;
-        flex-direction: column;
-        flex-wrap: nowrap;
-        justify-content: space-evenly;
-    }
-
-    section > div {
-    
-        margin: 0 auto;   
-        width:85%
-    }
-
-    div.col {
-
-        width: 100px;
-        height: 100px;
-        border: 5px solid black;
-    }
+#game-options_flex-column-div {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
 }
 
 
 // Desktop
-@media (min-width: ($maxMobileDeviceWidthInPixels + 1)) {
+@media (min-width: $minDesktopWidthInPixels) {
+    .img--placeholder {
+        background-color: whitesmoke;
+        height: 20%;
+        margin: 3rem auto;
+        width: 20%;
 
-    #homepage__img--placeholder {
-
-        background-color: black;
-        height: 375px;
-        margin: 0 auto;
-        width: 70%;
+        img {
+            height: 100%;
+            margin: 0 auto;
+            width:100%;
+        }
     }
 
+    form {
+        // Center our forms.
+        margin: 0 auto;   
+        width:50%;
+    }
+
+    // These are the buttons on the home screen and the game board screen.
     nav {
         display: flex;
         flex-direction: row;
         flex-wrap: nowrap;
-        justify-content: space-evenly;
+        justify-content: center;
+        margin-top: 1.5rem;
 
         button {
-
-            margin-top: 20px;
+            display: inline-block;
         }
     }
 
     section > div {
-    
         margin: 0 auto;   
         width:40%
     }
 
-
     div.col {
-
-        width: 175px;
-        height: 175px;
-        border: 5px solid black;
+        width: 7rem;
+        height: 7rem;
+        background-color: white;
     }
+
+    // I am sure that there is a better way to do this, but CSS
+    // is not my wheelhouse.
+    #gameboard-cell-0 {
+        border-bottom: 0;
+        border-left: 0;
+        border-right: 0;
+        border-top: 0;
+    }
+
+    #gameboard-cell-1 {
+        border-bottom: 0;
+        border-left: $gameboard-border-thickness;
+        border-right: $gameboard-border-thickness;
+        border-top: 0;
+        border-style: solid;
+        border-color: $gameboard-border-color;       
+    }   
+
+    #gameboard-cell-2 {
+        border-bottom: 0;
+        border-left: 0;
+        border-right: 0;
+        border-top: 0;
+    }   
+    
+    #gameboard-cell-3 {
+        border-bottom: $gameboard-border-thickness;
+        border-left: 0;
+        border-right: 0;
+        border-top: $gameboard-border-thickness;
+        border-style: solid;
+        border-color: $gameboard-border-color;       
+    }  
+
+    #gameboard-cell-4 {
+        border-bottom: $gameboard-border-thickness;
+        border-left: $gameboard-border-thickness;
+        border-right: $gameboard-border-thickness;
+        border-top: $gameboard-border-thickness;
+        border-style: solid;
+        border-color: $gameboard-border-color;         
+    }        
+
+    #gameboard-cell-5 {
+        border-bottom: $gameboard-border-thickness;
+        border-left: 0;
+        border-right: 0;
+        border-top: $gameboard-border-thickness;
+        border-style: solid;
+        border-color: $gameboard-border-color;   
+    }    
+    
+    #gameboard-cell-6 {
+        border-bottom: 0;
+        border-left: 0;
+        border-right: 0;
+        border-top: 0;
+    }    
+    
+    #gameboard-cell-7 {
+        border-bottom: 0;
+        border-left: $gameboard-border-thickness;
+        border-right: $gameboard-border-thickness;
+        border-top: 0;
+        border-style: solid;
+        border-color: black;         
+    }        
+
+    #gameboard-cell-8 {
+        border-bottom: 0;
+        border-left: 0;
+        border-right: 0;
+        border-top: 0;
+    } 
 }
+
+// Mobile devices
+// @media (max-width: $maxMobileDeviceWidthInPixels) {
+
+//     #homepage__img--placeholder {
+
+//         background-color: black;
+//         height: 275px;
+//         margin: 0 auto;
+//         width: 70%;
+//     }
+
+//     nav {
+//         display: flex;
+//         flex-direction: column;
+//         flex-wrap: nowrap;
+//         justify-content: space-evenly;
+//     }
+
+//     section > div {
+    
+//         margin: 0 auto;   
+//         width:85%
+//     }
+
+//     div.col {
+
+//         width: 100px;
+//         height: 100px;
+//         border: 5px solid black;
+//     }
+// }

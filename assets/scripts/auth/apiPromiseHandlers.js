@@ -58,8 +58,7 @@ const onSignInFailure = response => {
 const onChangePasswordSuccess = response => {
 
   $('#status-notification-message-area')
-    .text('You have successfully changed your password ' +
-       store.user.email);
+    .text(`Password change successful ${store.user.email}`);
 
   stateMachine.transitionToState(stateMachine.pageStates.gameOptionsPage);        
 };

@@ -1,0 +1,13 @@
+
+
+/* As best as I can determine, the MOTO G4 has the smallest
+   screen width at 360 pixels. */
+$minMobileDeviceWidthInPixels: 360px;
+$minDesktopWidthInPixels: $minMobileDeviceWidthInPixels + 1;
+
+$dark-theme-background: #212121;
+$accent-color: #6200EE;   
+$accent-color-light: lighten($accent-color, 30%);
+
+$gameboard-border-thickness: .2rem;
+$gameboard-border-color: $dark-theme-background;
