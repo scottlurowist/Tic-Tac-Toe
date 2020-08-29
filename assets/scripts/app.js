@@ -7,6 +7,7 @@
 // require('./example')
 const authEvents = require('./auth/events');
 const stateMachine = require('./pageStateMachine');
+const gameScoringEngine = require('./gameScoringEngine');
 
 
 $(() => {
@@ -43,4 +44,15 @@ $(() => {
   // This handles the button click on the game options page for exiting the 
   // application.
   $('#exit-tic-tac-toe-app-button').on('click', authEvents.onExitApp);
+
+  // This handles when the user clicks a cell on the actual Tic-Tac-Toe board.
+  // It scores the move.
+  $('.col').on('click', event => {
+    
+    gameScoringEngine.processCurrentMove(event)
+  })
+
+  // This handles when the user clicks the New Game button that exists
+  // on the game board itself.
+  $('#new-game-within-game-board-button').on('click', authEvents.onNewGame);
 })

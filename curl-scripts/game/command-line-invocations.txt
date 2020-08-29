@@ -1,3 +1,5 @@
 
 - TOKEN=9c61ce68c7af099d0574e648aa466245 sh curl-scripts/game/tic-tac-toe-create-new-game.sh
 
+- TOKEN=20d0a38c15c341197fbce12713660cb2 ID="" INDEX="0" VALUE="X" sh curl-scripts/game/tic-tac-toe-update-game.sh
+
