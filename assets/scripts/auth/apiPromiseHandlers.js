@@ -11,6 +11,7 @@
 
 const store = require('../store');
 const stateMachine = require('../pageStateMachine');
+const gameScoringEngine = require('../gameScoringEngine');
 
 
 // Processes the success promise success result when a user creates an account.
@@ -76,12 +77,16 @@ const onChangePasswordFailure = response => {
 // Processes the success promise success result when a user creates a new game.
 const onNewGameSuccess = response => {
 
+  // TODO: Do I need to keep this in the store?
   store.currentGame = response.game;
 
-  $('#status-notification-message-area')
-    .text('You have successfully created a new game ' + store.user.email);
+  // Now we may start playing the game.
+  gameScoringEngine.initializeGameEngine(response.game);
 
-  stateMachine.transitionToState(stateMachine.pageStates.newGamePage);   
+  stateMachine.transitionToState(stateMachine.pageStates.newGamePage); 
+  
+  $('#status-notification-message-area')
+  .text('You have successfully created a new game ' + store.user.email);
 };
 
 
