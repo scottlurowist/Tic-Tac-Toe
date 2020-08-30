@@ -1,6 +1,7 @@
 
-- TOKEN=66940f940647ae546391cc905be2f9fc sh curl-scripts/game/tic-tac-toe-create-new-game.sh
+- TOKEN=a330ad751ee9ac1fd00ef016e2f3c45c sh curl-scripts/game/tic-tac-toe-create-new-game.sh
 
 
-- TOKEN=66940f940647ae546391cc905be2f9fc ID=5f4a6a59567b6300172d6977 INDEX=0 VALUE="X" sh curl-scripts/game/tic-tac-toe-update-game.sh
+- ID=5f4bf3e98831c9001787f7ff TOKEN=a330ad751ee9ac1fd00ef016e2f3c45c  INDEX=0 VALUE="X" sh curl-scripts/game/tic-tac-toe-update-game.sh
 
+- TOKEN=1285f5b2c536594a8a54b6a3a9ebfdb7 sh curl-scripts/game/tic-tac-toe-get-games.sh
