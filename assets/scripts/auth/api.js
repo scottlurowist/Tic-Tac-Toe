@@ -6,6 +6,7 @@
 //
 ////////////////////////////////////////////////////////////////////////////////
 
+
 'use strict'
 
 
@@ -62,6 +63,31 @@ const newGame = () => {
 }
 
 
+// Invokes the web service for updating an existing game for a current user
+// who is currently active in the app. This requires a token to invoke.
+const updateGame = (gameId, index, value, isOver) => {
+
+  return $.ajax({
+    url: config.apiUrl + `/games/${gameId}`,
+    headers: {
+      'Authorization': 'Bearer ' + store.user.token
+    },
+    type: 'PATCH',
+    data: JSON.stringify({
+      game: {
+        cell: {
+          index: index,
+          value: value
+        },
+        over: isOver
+      }
+    }),
+    contentType: 'application/json',
+    dataType: 'json'
+  })
+};
+
+
 // Invokes the web service for exiting this application for a current user
 // who is curretnly active in the app. This requires a token to invoke so
 // that it can be removed from service.
@@ -82,5 +108,6 @@ module.exports = {
     signIn: signIn,
     changePassword: changePassword,
     newGame: newGame,
+    updateGame: updateGame,
     exitApp: exitApp
 }

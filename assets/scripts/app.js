@@ -51,7 +51,12 @@ $(() => {
   // It scores the move.
   $('.col').on('click', event => {
     
-    gameScoringEngine.processCurrentMove(event)
+    const currentMoveResults = gameScoringEngine.processCurrentMove(event);
+
+    // I wanted to invoke this from the game engine, but doing so would result
+    // in circular references with respect to CommonJS. 
+    authEvents.onUpdateGame(currentMoveResults.id, currentMoveResults.index,
+      currentMoveResults.value, currentMoveResults.isGameComplete);
   })
 
   // This handles when the user clicks the New Game button that exists

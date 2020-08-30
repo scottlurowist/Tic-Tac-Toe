@@ -93,8 +93,25 @@ const onNewGameSuccess = response => {
 // create a new game.
 const onNewGameFailure = response => {
 
+    gameScoringEngine.updateGameStatus(response.game);
+    
     $('#status-notification-message-area')
       .text('Your attempt to create a new game failed. Please try again later.');
+};
+
+
+// Processes the success promise success result when a user updates a game.
+const onUpdateGameSuccess = response => {
+  
+  gameScoringEngine.updateGameStatus(response.game, true);
+};
+
+
+// Processes the success promise failure result when a user attempts to 
+// update a game.
+const onUpdateGameFailure = response => {
+
+  gameScoringEngine.updateGameStatus(response.game, false);
 };
 
 
@@ -126,6 +143,8 @@ module.exports = {
   onChangePasswordFailure,
   onNewGameSuccess,
   onNewGameFailure,
+  onUpdateGameSuccess,
+  onUpdateGameFailure,
   onExitAppSuccess,
   onExitAppFailure  
 };
