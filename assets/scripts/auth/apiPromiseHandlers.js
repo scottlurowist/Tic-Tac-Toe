@@ -9,9 +9,9 @@
 'use strict'
 
 
-const store = require('../store');
-const stateMachine = require('../pageStateMachine');
-const gameScoringEngine = require('../gameScoringEngine');
+const store = require('./../store');
+const stateMachine = require('./../pageStateMachine');
+const gameScoringEngine = require('./../gameScoringEngine');
 
 
 // Processes the success promise success result when a user creates an account.

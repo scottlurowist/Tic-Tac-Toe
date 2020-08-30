@@ -11,7 +11,7 @@
 const getFormFields = require('./../../../lib/get-form-fields');
 const api = require('./api');
 const ui = require('./apiPromiseHandlers');
-const stateMachine = require('../pageStateMachine');
+const stateMachine = require('./../pageStateMachine');
 
 
 // This event simply navigates to the signup page.

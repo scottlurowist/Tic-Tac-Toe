@@ -10,7 +10,7 @@
 
 
 const config = require('./../config')
-const store = require('../store')
+const store = require('./../store')
 
 
 // Invokes the web service for the signup of a new account.
