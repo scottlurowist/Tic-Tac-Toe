@@ -13,6 +13,9 @@
 let currentGame = null;
 let currentPlayer = null;
 let numberOfMoves = 0;
+let currentEventTarget = null;
+let currentCellNumberClicked = -1;
+let isGameWon = false;
 
 
 // This method should be invoked when the app is started. It sets the
@@ -22,6 +25,9 @@ const initializeGameEngine = game => {
     currentGame = game;
     currentPlayer = "X";
     numberOfMoves = 0;
+    currentEventTarget = null;
+    currentCellNumberClicked = -1;
+    isGameWon = false;    
 
     // Reset the game board from possible previous games.
     $('#gameboard-cell-0').text('');
@@ -186,13 +192,13 @@ const isThereAWinOrTie = () => {
 // Navigates to the next "page" in the SPA, as defined by nextState.
 const processCurrentMove = event => {
 
-    const cellNumberClicked = event.target.id[event.target.id.length - 1];
+    currentCellNumberClicked = event.target.id[event.target.id.length - 1];
 
     $('#status-notification-message-area').text('');
 
     // Did the user select a cell that has already been played?
-    if (currentGame.cells[cellNumberClicked] === "X" ||
-        currentGame.cells[cellNumberClicked] === "O") {
+    if (currentGame.cells[currentCellNumberClicked] === "X" ||
+        currentGame.cells[currentCellNumberClicked] === "O") {
 
         $('#status-notification-message-area')
         .text('You cannot select a cell already played. Try again.');
@@ -200,48 +206,66 @@ const processCurrentMove = event => {
         return;
     }
 
-    // Update the move of the game.
-    numberOfMoves++;
+    // Save this for processing in updateGameStatus.
+    currentEventTarget = event.target;
 
-    // When we load the images into the grid and hide the grid then reshow 
-    // the grid, the images appear to unload. So we hide our X and Y images
-    // and then clone them and then attach them to the clicked cell grid. 
-    let imageName = '#x-image';
+    // Update the game board for scoring purposes.
+    currentGame.cells[currentCellNumberClicked] = currentPlayer;
 
-    if (currentPlayer === 'O') {
-      imageName = '#o-image';     
+   // Update the move of the game.
+   numberOfMoves++;
+
+   isGameWon = isThereAWinOrTie();
+
+    return {
+      id: currentGame._id,
+      index: parseInt(currentCellNumberClicked),
+      value: currentPlayer,
+      isGameComplete: isGameWon
     }
+}
 
-    $(imageName).clone().appendTo($(event.target)); 
 
-    // Now we need to show the hidden, cloned image.
-    $(event.target).children("img").css("display", "inline");
+const updateGameStatus = (game, wasUpdateSuccessful) => {
+
+  // If the web service update was not successful, then halt the game.
+  // The game variable will not have been updated. Don't update the board.
+  // Just write a message to the display.
+  if (!wasUpdateSuccessful) {
 
     $("#status-notification-message-area")
-      .text(`Player ${currentPlayer} to cell ${cellNumberClicked}.`);
+      .text('The game update was not successful.');
+  }
 
-    // Update our game board with the latest move.  
-    currentGame.cells[cellNumberClicked] = currentPlayer;
+  currentGame = game;
 
-    // We need to to score the round before invoking the update game
-    // web service because we need to inform the web service whether the 
-    // game is completed.
-    let isGameComplete = false;
+   // When we load the images into the grid and hide the grid then reshow 
+   // the grid, the images appear to unload. So we hide our X and Y images
+   // and then clone them and then attach them to the clicked cell grid. 
+   let imageName = '#x-image';
 
-    if (isThereAWinOrTie()) {
-      isGameComplete = true;
-    }
+   if (currentPlayer === 'O') {
+     imageName = '#o-image';     
+   }
 
-    //let foo = api;
-    //authEvents.onUpdateGame(currentGame._id, parseInt(cellNumberClicked), currentPlayer, isGameComplete);
+   $(imageName).clone().appendTo($(currentEventTarget)); 
 
-    // Switch player X to O, or O to X.
-    toggleCurrentPlayer();
-}
+   // Now we need to show the hidden, cloned image.
+   $(currentEventTarget).children("img").css("display", "inline");
+
+   if (!isGameWon) {
+    $("#status-notification-message-area")
+    .text(`Player ${currentPlayer} to cell ${currentCellNumberClicked}.`);
+   }
+
+   // Switch player X to O, or O to X.
+   toggleCurrentPlayer();
+} 
 
 
 module.exports = {
 
     initializeGameEngine,
-    processCurrentMove
+    processCurrentMove,
+    updateGameStatus
 }

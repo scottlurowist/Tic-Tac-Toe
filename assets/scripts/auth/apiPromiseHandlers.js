@@ -93,6 +93,8 @@ const onNewGameSuccess = response => {
 // create a new game.
 const onNewGameFailure = response => {
 
+    gameScoringEngine.updateGameStatus(response.game);
+    
     $('#status-notification-message-area')
       .text('Your attempt to create a new game failed. Please try again later.');
 };
@@ -100,9 +102,8 @@ const onNewGameFailure = response => {
 
 // Processes the success promise success result when a user updates a game.
 const onUpdateGameSuccess = response => {
-
-   $('#status-notification-message-area')
-  .text('You have successfully created a new game ' + store.user.email);
+  
+  gameScoringEngine.updateGameStatus(response.game, true);
 };
 
 
@@ -110,8 +111,7 @@ const onUpdateGameSuccess = response => {
 // update a game.
 const onUpdateGameFailure = response => {
 
-    $('#status-notification-message-area')
-      .text('Your attempt to update a game failed.');
+  gameScoringEngine.updateGameStatus(response.game, false);
 };
 
 
