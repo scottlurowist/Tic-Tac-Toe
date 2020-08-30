@@ -188,7 +188,18 @@ const processCurrentMove = event => {
 
     numberOfMoves++;
 
-    $(event.target).text(currentPlayer);
+    if (currentPlayer === 'X') {
+      $('#x-image').clone().appendTo($(event.target));      
+    }
+    else {
+      $('#o-image').clone().appendTo($(event.target));  
+    }
+
+    $(event.target).children("img").css("display", "inline");
+
+    $("#status-notification-message-area")
+    .text(`Player ${currentPlayer} to cell ${cellNumberClicked}.`);
+
     currentGame.cells[cellNumberClicked] = currentPlayer;
 
     scoreTheRound();

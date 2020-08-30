@@ -16,6 +16,8 @@ $(() => {
   // index.html file. So we imagine that we have a pseudo-state machine and 
   // we must hide sections of the page depending upon which state we are.
   stateMachine.initializeStateMachine();
+
+  //$('#new-game-page').show();
   
   // Handles the two buttons found on the home page to either create an account
   // or to sign into an existing account.
