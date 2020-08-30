@@ -94,6 +94,19 @@ const onNewGame = event => {
 }
 
 
+// This event is triggered when the user has requested to update
+// an existing game. It will invoke the web service that updates an existing
+// game. 
+const onUpdateGame = (gameId, index, value, isGameOver) => {
+
+    event.preventDefault();
+    
+    api.updateGame(gameId, index, value, isGameOver)
+        .then(ui.onUpdateGameSuccess)
+        .catch(ui.onUpdateGameFailure);
+}
+
+
 // This event is triggered when the user has either won,
 // lost, or tied a game, and this will simply return the user to
 // the Game Options page. From there the user may select what they
@@ -127,6 +140,7 @@ module.exports = {
     onChangePasswordShowForm: onChangePasswordShowForm,
     onChangePassword: onChangePassword,
     onNewGame: onNewGame,
+    onUpdateGame: onUpdateGame,
     onReturnToGameOptionsFromNewGame: onReturnToGameOptionsFromNewGame,
     onExitApp: onExitApp
 }

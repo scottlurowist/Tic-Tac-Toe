@@ -98,6 +98,23 @@ const onNewGameFailure = response => {
 };
 
 
+// Processes the success promise success result when a user updates a game.
+const onUpdateGameSuccess = response => {
+
+   $('#status-notification-message-area')
+  .text('You have successfully created a new game ' + store.user.email);
+};
+
+
+// Processes the success promise failure result when a user attempts to 
+// update a game.
+const onUpdateGameFailure = response => {
+
+    $('#status-notification-message-area')
+      .text('Your attempt to update a game failed.');
+};
+
+
 // Processes the success promise success result when a user exits the application.
 const onExitAppSuccess = response => {
 
@@ -126,6 +143,8 @@ module.exports = {
   onChangePasswordFailure,
   onNewGameSuccess,
   onNewGameFailure,
+  onUpdateGameSuccess,
+  onUpdateGameFailure,
   onExitAppSuccess,
   onExitAppFailure  
 };

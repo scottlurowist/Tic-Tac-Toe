@@ -45,9 +45,18 @@ const toggleCurrentPlayer = () => {
 };
 
 
+// This method checks whether there is a win. In terms of combinatorics,
+// there are 8 ways to win the game; 3 rows, 3 columns, and 2 diagonals.
+// A player can also only win on or after the 5th move since X goes first,
+// and must select 3 in-a-row while O selects two spaces. So do not check
+// for a win unless we are on moves 5 through 9.
 const checkForWin = () => {
   
+  // For reasons just stated...
+  if (numberOfMoves < 5) return false;
+
   let isThereAWin = false;  
+
   // Use the transitive property of equality to check for a win.
   // First check the top row.
   if (
@@ -150,22 +159,27 @@ const checkForWin = () => {
 
 const checkForTie = () => {
 
+    // We can only tie on the last move of the game if and only if
+    // nobody has won by the 8th move. 
     if (numberOfMoves === 9) {
         $("#status-notification-message-area")
         .text(`Players X and O are tied.`);  
         
         $('#new-game-return-to-game-options').prop("disabled", false);
-        $('#new-game-within-game-board-button').prop("disabled", false);            
+        $('#new-game-within-game-board-button').prop("disabled", false);  
+        
+        return true;
     }
+
+    return false;
 };
 
 
-const scoreTheRound = () => {
+const isThereAWinOrTie = () => {
 
-    // Only check for ties if we don't have a win.
-    if(!checkForWin()) {
-        checkForTie();
-    }
+    // Return false if there is not a win or there is not a tie.
+    // Only return true for a win or a tie.
+    return checkForWin() || checkForTie() ? true : false;
 };
 
 
@@ -186,30 +200,43 @@ const processCurrentMove = event => {
         return;
     }
 
+    // Update the move of the game.
     numberOfMoves++;
 
-    if (currentPlayer === 'X') {
-      $('#x-image').clone().appendTo($(event.target));      
-    }
-    else {
-      $('#o-image').clone().appendTo($(event.target));  
+    // When we load the images into the grid and hide the grid then reshow 
+    // the grid, the images appear to unload. So we hide our X and Y images
+    // and then clone them and then attach them to the clicked cell grid. 
+    let imageName = '#x-image';
+
+    if (currentPlayer === 'O') {
+      imageName = '#o-image';     
     }
 
+    $(imageName).clone().appendTo($(event.target)); 
+
+    // Now we need to show the hidden, cloned image.
     $(event.target).children("img").css("display", "inline");
 
     $("#status-notification-message-area")
-    .text(`Player ${currentPlayer} to cell ${cellNumberClicked}.`);
+      .text(`Player ${currentPlayer} to cell ${cellNumberClicked}.`);
 
+    // Update our game board with the latest move.  
     currentGame.cells[cellNumberClicked] = currentPlayer;
 
-    scoreTheRound();
+    // We need to to score the round before invoking the update game
+    // web service because we need to inform the web service whether the 
+    // game is completed.
+    let isGameComplete = false;
+
+    if (isThereAWinOrTie()) {
+      isGameComplete = true;
+    }
+
+    //let foo = api;
+    //authEvents.onUpdateGame(currentGame._id, parseInt(cellNumberClicked), currentPlayer, isGameComplete);
+
+    // Switch player X to O, or O to X.
     toggleCurrentPlayer();
-
-
-
-    // Make call to web service here:
-    // cellNumber and value...
-
 }
 
 
