@@ -18,37 +18,73 @@ let currentCellNumberClicked = -1;
 let isGameWon = false;
 
 
-// This method should be invoked when the app is started. It sets the
-// initial state of the app to the home page.
+// This method should be invoked when the app is started or upon starting
+// a new game. It sets the initial state of the app to the home page.
 const initializeGameEngine = game => {
 
     currentGame = game;
-    currentPlayer = "X";
+    currentPlayer = "x";
     numberOfMoves = 0;
     currentEventTarget = null;
     currentCellNumberClicked = -1;
     isGameWon = false;    
 
+    const boardIds = ['#gameboard-cell-0', '#gameboard-cell-1', '#gameboard-cell-2',
+                      '#gameboard-cell-3', '#gameboard-cell-4', '#gameboard-cell-5',
+                      '#gameboard-cell-6', '#gameboard-cell-7', '#gameboard-cell-8' ]
+
     // Reset the game board from possible previous games.
-    $('#gameboard-cell-0').text('');
-    $('#gameboard-cell-1').text('');
-    $('#gameboard-cell-2').text('');
-    $('#gameboard-cell-3').text('');  
-    $('#gameboard-cell-4').text('');
-    $('#gameboard-cell-5').text('');  
-    $('#gameboard-cell-6').text('');
-    $('#gameboard-cell-7').text('');                  
-    $('#gameboard-cell-8').text('');  
+    boardIds.forEach(boardCell => {
+
+      $(boardCell).attr("style", "background: white;")
+      $(boardCell + " img").remove();
+    });
 
     $('#new-game-return-to-game-options').prop("disabled", true);
     $('#new-game-within-game-board-button').prop("disabled", true);    
 };
 
 
+// Switches the player from x to o, or o to x. 
 const toggleCurrentPlayer = () => {
 
-    currentPlayer = (currentPlayer === "X") ? "O" : "X";
+    currentPlayer = (currentPlayer === "x") ? "o" : "x";
 };
+
+
+// Checks a collection of 3 gamboard cells for a win.
+const checkBoardForWin = (firstCellIndex, secondCellIndex, thirdCellIndex) => {
+
+  if (
+    currentGame.cells[firstCellIndex] === currentGame.cells[secondCellIndex] &&
+    currentGame.cells[secondCellIndex] === currentGame.cells[thirdCellIndex] &&
+    currentGame.cells[firstCellIndex] !== ''
+  ) {
+      // Animate the winning row, column, or diagonal. 
+      setTimeout(() => {
+        document.querySelector(`#gameboard-cell-${firstCellIndex}`)
+          .style.background = "yellow";
+      }, 750);
+
+      setTimeout(() => {
+        document.querySelector(`#gameboard-cell-${secondCellIndex}`)
+          .style.background = "yellow";
+      }, 1500);
+
+      setTimeout(() => {
+        document.querySelector(`#gameboard-cell-${thirdCellIndex}`)
+          .style.background = "yellow";
+      }, 2250);
+
+      // Update the status area.
+      $("#status-notification-message-area")
+      .text(`Player ${currentPlayer} wins!`); 
+
+      return true;
+    }
+
+    return false;
+} 
 
 
 // This method checks whether there is a win. In terms of combinatorics,
@@ -65,90 +101,42 @@ const checkForWin = () => {
 
   // Use the transitive property of equality to check for a win.
   // First check the top row.
-  if (
-    currentGame.cells[0] === currentGame.cells[1] &&
-    currentGame.cells[1] === currentGame.cells[2] &&
-    currentGame.cells[0] !== ''
-  ) {
-    $("#status-notification-message-area")
-        .text(`Player ${currentPlayer} wins!`);
+  if (checkBoardForWin(0, 1, 2)) {
 
     isThereAWin = true;    
   }
   // Check the middle row.
-  else if (
-    currentGame.cells[3] === currentGame.cells[4] &&
-    currentGame.cells[4] === currentGame.cells[5] &&
-    currentGame.cells[3] !== ''
-  ) {
-    $("#status-notification-message-area")
-        .text(`Player ${currentPlayer} wins!`);
-        
+  else if (checkBoardForWin(3, 4, 5)) {
+     
     isThereAWin = true;       
   }
   // Check the bottom row.
-  else if (
-    currentGame.cells[6] === currentGame.cells[7] &&
-    currentGame.cells[7] === currentGame.cells[8] &&
-    currentGame.cells[6] !== ''
-  ) {
-    $("#status-notification-message-area")
-        .text(`Player ${currentPlayer} wins!`);
-        
+  else if (checkBoardForWin(6, 7, 8)) {
+
     isThereAWin = true;    
   }
   // Check the left column.
-  else if (
-    currentGame.cells[0] === currentGame.cells[3] &&
-    currentGame.cells[3] === currentGame.cells[6] &&
-    currentGame.cells[0] !== ''
-  ) {
-    $("#status-notification-message-area")
-        .text(`Player ${currentPlayer} wins!`);
-        
+  else if (checkBoardForWin(0, 3, 6)) {
+
     isThereAWin = true;      
   }
   // Check the middle column.
-  else if (
-    currentGame.cells[1] === currentGame.cells[4] &&
-    currentGame.cells[4] === currentGame.cells[7] &&
-    currentGame.cells[1] !== ''
-  ) {
-    $("#status-notification-message-area")
-        .text(`Player ${currentPlayer} wins!`);
+  else if (checkBoardForWin(1, 4, 7)) {
         
     isThereAWin = true;            
   }
   // Check the right column.
-  else if (
-    currentGame.cells[2] === currentGame.cells[5] &&
-    currentGame.cells[5] === currentGame.cells[8] &&
-    currentGame.cells[2] !== ''
-  ) {
-    $("#status-notification-message-area")
-        .text(`Player ${currentPlayer} wins!`);
+  else if (checkBoardForWin(2, 5, 8)) {
 
     isThereAWin = true;                    
   } 
   // Check the top left to bottom right diagonol.
-  else if (
-    currentGame.cells[0] === currentGame.cells[4] &&
-    currentGame.cells[4] === currentGame.cells[8] &&
-    currentGame.cells[0] !== ''
-  ) {
-    $("#status-notification-message-area")
-        .text(`Player ${currentPlayer} wins!`);
-        
+  else if (checkBoardForWin(0, 4, 8)) {
+
     isThereAWin = true;                     
   }  
   // Check the bottom left to top right diagonol.
-  else if (
-    currentGame.cells[6] === currentGame.cells[4] &&
-    currentGame.cells[4] === currentGame.cells[2] &&
-    currentGame.cells[6] !== ''
-  ) {
-    $("#status-notification-message-area")
-        .text(`Player ${currentPlayer} wins!`);
+  else if (checkBoardForWin(6, 4, 2)) {
 
     isThereAWin = true;                     
   }
@@ -197,8 +185,8 @@ const processCurrentMove = event => {
     $('#status-notification-message-area').text('');
 
     // Did the user select a cell that has already been played?
-    if (currentGame.cells[currentCellNumberClicked] === "X" ||
-        currentGame.cells[currentCellNumberClicked] === "O") {
+    if (currentGame.cells[currentCellNumberClicked] === "x"||
+        currentGame.cells[currentCellNumberClicked] === "o") {
 
         $('#status-notification-message-area')
         .text('You cannot select a cell already played. Try again.');
@@ -244,7 +232,7 @@ const updateGameStatus = (game, wasUpdateSuccessful) => {
    // and then clone them and then attach them to the clicked cell grid. 
    let imageName = '#x-image';
 
-   if (currentPlayer === 'O') {
+   if (currentPlayer === 'o') {
      imageName = '#o-image';     
    }
 
