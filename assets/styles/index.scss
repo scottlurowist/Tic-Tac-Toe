@@ -83,10 +83,11 @@ label {
         flex-direction: row;
         flex-wrap: nowrap;
         justify-content: center;
-        margin-top: 1.5rem;
+        margin: 1.5rem;
 
         button {
             display: inline-block;
+            margin: 0 1.5rem;
         }
     }
 
@@ -98,12 +99,7 @@ label {
 
     // Sets the for each gameboard cell/
     div.col {
-        //align-items: center;
-        //justify-content: center;
         height: 7rem;
-        //left: 0px;       
-        position: relative; 
-        //top: 0px;
         width: 7rem;
     }
 
@@ -112,15 +108,7 @@ label {
     .x-image, .o-image {
         display: none;
         height: 100%;
-        //left: 0px;
-        position: absolute;
-        //top: 0px;
         width: 80%;        
-
-        // Set this so that if the user clicks on the gameboard's 
-        // gamepiece image, the click handler for the gameboard
-        // cell is activated instead of the img.
-        //z-index: -5;        
     }
 
     // I am sure that there is a better way to do this, but CSS

@@ -128,6 +128,7 @@ const onGetGamesSuccess = response => {
       break;
     case 1:
       numberOfGamesStringMessage = "one game";
+      break;
     default:
       numberOfGamesStringMessage = `${numberOfGamesPlayed} games`;
       break;
@@ -142,9 +143,8 @@ const onGetGamesSuccess = response => {
 // get a history of their games.
 const onGetGamesFailure = response => {
     
-  const foo = response;
-  const bar = 4;
-  //gameScoringEngine.updateGameStatus(response.game, false);
+  $('#status-notification-message-area')
+    .text('The API called to retrieve the number of games has failed ' + store.user.email);
 };
 
 
