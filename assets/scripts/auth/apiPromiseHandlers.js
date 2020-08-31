@@ -115,6 +115,39 @@ const onUpdateGameFailure = response => {
 };
 
 
+// Processes the success promise success result when a user gets a history
+// of their games.
+const onGetGamesSuccess = response => {
+  
+  const numberOfGamesPlayed = response.games.length;
+  let numberOfGamesStringMessage = null;
+  
+  switch (numberOfGamesPlayed) {
+    case 0:
+      numberOfGamesStringMessage = "no games";
+      break;
+    case 1:
+      numberOfGamesStringMessage = "one game";
+    default:
+      numberOfGamesStringMessage = `${numberOfGamesPlayed} games`;
+      break;
+  } 
+
+  $('#status-notification-message-area')
+    .text(`You have played ${numberOfGamesStringMessage} ` + store.user.email);
+};
+
+
+// Processes the success promise failure result when a user attempts to 
+// get a history of their games.
+const onGetGamesFailure = response => {
+    
+  const foo = response;
+  const bar = 4;
+  //gameScoringEngine.updateGameStatus(response.game, false);
+};
+
+
 // Processes the success promise success result when a user exits the application.
 const onExitAppSuccess = response => {
 
@@ -145,6 +178,8 @@ module.exports = {
   onNewGameFailure,
   onUpdateGameSuccess,
   onUpdateGameFailure,
+  onGetGamesSuccess,
+  onGetGamesFailure,
   onExitAppSuccess,
   onExitAppFailure  
 };
