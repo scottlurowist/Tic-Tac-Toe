@@ -27,17 +27,31 @@ const pageStates = {
 
 // Cache the DOM queries. These are not exposed to the rest of the app.
 const homePageJQuerySelector = $('#home-page');
+
+// The signup page.
 const signUpPageJQuerySelector = $('#sign-up-page-form');
 const signUpPageEmailJQuerySelector = $('#sign-up-email');
 const signUpPagePasswordJQuerySelector = $('#sign-up-password');
 const signUpPagePasswordConfirmationJQuerySelector = $('#sign-up-password_confirmation');
 const signUpPageCreateButtonJQuerySelector = $('#sign-up-page-form .btn');
+
+// The signin page.
 const signInPageJQuerySelector = $('#sign-in-page-form');
 const signInPageEmailJQuerySelector = $('#sign-in-email');
 const signInPagePasswordJQuerySelector = $('#sign-in-password');
 const signInPageCreateButtonJQuerySelector = $('#sign-in-page-form .btn');
-const gameOptionsPageJQuerySelector = $('#game-options-page-form');
+
+// The change password page.
 const changePasswordPageJQuerySelector = $('#change-password-page-form');
+const changePasswordOldPasswordJQuerySelector = $('#old-password');
+const changePasswordNewPasswordJQuerySelector = $('#new-password');
+const changePasswordButtonJQuerySelector = $('#change-password-page-form .btn');
+
+// The game options page.
+const gameOptionsPageJQuerySelector = $('#game-options-page-form');
+
+
+// The new game page.
 const newGamePage = $('#new-game-page');
 
 
@@ -78,6 +92,7 @@ const transitionToState = (nextState) => {
 
     initializeSignUpPage();
     initializeSignInPage();
+    initializeChangePasswordPage();
 
     privatePageStatesMap[nextState].show();
 }
@@ -102,6 +117,17 @@ const initializeSignInPage = () => {
     signInPagePasswordJQuerySelector.val('');    
     
     signInPageCreateButtonJQuerySelector.hide();
+}
+
+
+// Clears the form elements and hides the signin button for the 
+// signin page.
+const initializeChangePasswordPage = () => {
+
+    changePasswordOldPasswordJQuerySelector.val('');
+    changePasswordNewPasswordJQuerySelector.val('');    
+    
+    changePasswordButtonJQuerySelector.hide();
 }
 
 
@@ -135,7 +161,24 @@ const isTimeToShowSignInButton = () => {
 
 // Event handlers for the blur event for the input fields for the signin page.
 signInPageEmailJQuerySelector.blur(isTimeToShowSignInButton); 
-signInPagePasswordJQuerySelector.blur(isTimeToShowSignInButton); 
+signInPagePasswordJQuerySelector.blur(isTimeToShowSignInButton);
+
+
+// Enable the change password button only when the old,
+// password, and new password confirmation input fields are not empty.
+const isTimeToShowChangePasswordButton = () => {
+    if ((changePasswordOldPasswordJQuerySelector.val() !== '') &&
+        (changePasswordNewPasswordJQuerySelector.val() !== '')) {
+
+            changePasswordButtonJQuerySelector.show();
+        }
+}
+
+
+// Event handlers for the blur event for the input fields for the change
+// password page.
+changePasswordOldPasswordJQuerySelector.blur(isTimeToShowChangePasswordButton); 
+changePasswordNewPasswordJQuerySelector.blur(isTimeToShowChangePasswordButton); 
 
 
 module.exports = {
