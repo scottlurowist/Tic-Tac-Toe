@@ -33,6 +33,9 @@ const signUpPagePasswordJQuerySelector = $('#sign-up-password');
 const signUpPagePasswordConfirmationJQuerySelector = $('#sign-up-password_confirmation');
 const signUpPageCreateButtonJQuerySelector = $('#sign-up-page-form .btn');
 const signInPageJQuerySelector = $('#sign-in-page-form');
+const signInPageEmailJQuerySelector = $('#sign-in-email');
+const signInPagePasswordJQuerySelector = $('#sign-in-password');
+const signInPageCreateButtonJQuerySelector = $('#sign-in-page-form .btn');
 const gameOptionsPageJQuerySelector = $('#game-options-page-form');
 const changePasswordPageJQuerySelector = $('#change-password-page-form');
 const newGamePage = $('#new-game-page');
@@ -73,14 +76,15 @@ const transitionToState = (nextState) => {
         privatePageStatesMap[currentPageInfo].hide();
     }
 
-    initializeSignupPage();
+    initializeSignUpPage();
+    initializeSignInPage();
 
     privatePageStatesMap[nextState].show();
 }
 
 // Clears the form elements and hides the signup button for the 
 // signup page.
-const initializeSignupPage = () => {
+const initializeSignUpPage = () => {
 
     signUpPageEmailJQuerySelector.val('');
     signUpPagePasswordJQuerySelector.val('');    
@@ -90,9 +94,20 @@ const initializeSignupPage = () => {
 }
 
 
+// Clears the form elements and hides the signin button for the 
+// signin page.
+const initializeSignInPage = () => {
+
+    signInPageEmailJQuerySelector.val('');
+    signInPagePasswordJQuerySelector.val('');    
+    
+    signInPageCreateButtonJQuerySelector.hide();
+}
+
+
 // Enable the signup button only when the email,
 // password, and password confirmation input fields are not empty.
-const isTimeToShowSignupButton = () => {
+const isTimeToShowSignUpButton = () => {
     if ((signUpPageEmailJQuerySelector.val() !== '') &&
         (signUpPagePasswordJQuerySelector.val() !== '') &&
         (signUpPagePasswordConfirmationJQuerySelector.val() !== '')) {
@@ -102,9 +117,25 @@ const isTimeToShowSignupButton = () => {
 }
 
 // Event handlers for the blur event for the input fields for the signup page.
-signUpPageEmailJQuerySelector.blur(isTimeToShowSignupButton); 
-signUpPagePasswordJQuerySelector.blur(isTimeToShowSignupButton); 
-signUpPagePasswordConfirmationJQuerySelector.blur(isTimeToShowSignupButton); 
+signUpPageEmailJQuerySelector.blur(isTimeToShowSignUpButton); 
+signUpPagePasswordJQuerySelector.blur(isTimeToShowSignUpButton); 
+signUpPagePasswordConfirmationJQuerySelector.blur(isTimeToShowSignUpButton); 
+
+
+// Enable the signup button only when the email,
+// password, and password confirmation input fields are not empty.
+const isTimeToShowSignInButton = () => {
+    if ((signInPageEmailJQuerySelector.val() !== '') &&
+        (signInPagePasswordJQuerySelector.val() !== '')) {
+
+            signInPageCreateButtonJQuerySelector.show();
+        }
+}
+
+
+// Event handlers for the blur event for the input fields for the signin page.
+signInPageEmailJQuerySelector.blur(isTimeToShowSignInButton); 
+signInPagePasswordJQuerySelector.blur(isTimeToShowSignInButton); 
 
 
 module.exports = {
