@@ -88,6 +88,20 @@ const updateGame = (gameId, index, value, isOver) => {
 };
 
 
+// Invokes the web service for getting all of the games played for a user. 
+// This requires a token to invoke.
+const getGames = () => {
+
+  return $.ajax({
+    url: config.apiUrl + '/games/',
+    headers: {
+      'Authorization': 'Bearer ' + store.user.token
+    },
+    type: 'GET'
+  })
+};
+
+
 // Invokes the web service for exiting this application for a current user
 // who is curretnly active in the app. This requires a token to invoke so
 // that it can be removed from service.
@@ -109,5 +123,6 @@ module.exports = {
     changePassword: changePassword,
     newGame: newGame,
     updateGame: updateGame,
+    getGames, getGames,
     exitApp: exitApp
 }

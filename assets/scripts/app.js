@@ -62,4 +62,8 @@ $(() => {
   // This handles when the user clicks the New Game button that exists
   // on the game board itself.
   $('#new-game-within-game-board-button').on('click', authEvents.onNewGame);
+
+  // This handles when the user clicks the New Game button that exists
+  // on the game board itself.
+  $('#game-history-button').on('click', authEvents.onGetGames);  
 })
