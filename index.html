@@ -184,7 +184,7 @@
 
             <nav>
               <button id="new-game-return-to-game-options"
-              type="button" class="btn btn-primary">
+                      type="button" class="btn btn-primary">
                 Return to Game Options
               </button>
               <button id="new-game-within-game-board-button"
@@ -193,11 +193,11 @@
               </button>  
             </nav>
 
-            <!-- TODO: Eliminate the style attribute. -->
-            <img src="./assets//images/X.png" id="x-image" width="50%" height="50%"
-                 style="display: none;">
-            <img src="./assets//images/O.png" id="o-image" width="50%" height="50%"
-                 style="display: none;">            
+            <!-- This DIV lets us cache our game pieces. -->
+            <div id="gameboard-images-cache">
+              <img src="./assets//images/X.png" class="x-image">
+              <img src="./assets//images/O.png" class="o-image">
+            </div>
           </div>
         </section>            
       </main>

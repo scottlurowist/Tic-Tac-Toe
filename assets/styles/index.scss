@@ -38,6 +38,7 @@ label {
     border: .2rem solid $accent-color-light;
     border-radius: 1rem;    
     font-size: 1.25rem;
+    height: 25%;
     margin: 2rem auto 2rem auto;
     padding: 1.1rem;
     text-align: center;
@@ -49,12 +50,11 @@ label {
 }
 
 #game-options_flex-column-div {
+    align-items: center;    
     display: flex;
     flex-direction: column;
     justify-content: center;
-    align-items: center;
 }
-
 
 // Desktop
 @media (min-width: $minDesktopWidthInPixels) {
@@ -74,7 +74,7 @@ label {
     form {
         // Center our forms.
         margin: 0 auto;   
-        width:50%;
+        width:25%;
     }
 
     // These are the buttons on the home screen and the game board screen.
@@ -90,15 +90,37 @@ label {
         }
     }
 
-    section > div {
-        margin: 0 auto;   
-        width:40%
+    // Centers the gameboard and restricts its width.
+    #board-container {
+        margin: 0 auto;  
+        width:40%;
     }
 
+    // Sets the for each gameboard cell/
     div.col {
-        width: 7rem;
+        //align-items: center;
+        //justify-content: center;
         height: 7rem;
-        background-color: white;
+        //left: 0px;       
+        position: relative; 
+        //top: 0px;
+        width: 7rem;
+    }
+
+    // The pre-loaded X and O images for the game board to be cloned
+    // and copied when a game board cell is clicked. 
+    .x-image, .o-image {
+        display: none;
+        height: 100%;
+        //left: 0px;
+        position: absolute;
+        //top: 0px;
+        width: 80%;        
+
+        // Set this so that if the user clicks on the gameboard's 
+        // gamepiece image, the click handler for the gameboard
+        // cell is activated instead of the img.
+        //z-index: -5;        
     }
 
     // I am sure that there is a better way to do this, but CSS
@@ -176,35 +198,3 @@ label {
         border-top: 0;
     } 
 }
-
-// Mobile devices
-// @media (max-width: $maxMobileDeviceWidthInPixels) {
-
-//     #homepage__img--placeholder {
-
-//         background-color: black;
-//         height: 275px;
-//         margin: 0 auto;
-//         width: 70%;
-//     }
-
-//     nav {
-//         display: flex;
-//         flex-direction: column;
-//         flex-wrap: nowrap;
-//         justify-content: space-evenly;
-//     }
-
-//     section > div {
-    
-//         margin: 0 auto;   
-//         width:85%
-//     }
-
-//     div.col {
-
-//         width: 100px;
-//         height: 100px;
-//         border: 5px solid black;
-//     }
-// }
