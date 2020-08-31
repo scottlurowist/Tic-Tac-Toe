@@ -34,8 +34,10 @@ $(() => {
   // user's password.
   $('#change-password-button').on('click', authEvents.onChangePasswordShowForm);
 
+  // This handles the change password button click.
   $('#change-password-page-form').on('submit', authEvents.onChangePassword);
 
+  // This handles returning to the game options screen from the game page.
   $('#new-game-return-to-game-options')
     .on('click', authEvents.onReturnToGameOptionsFromNewGame);
 
