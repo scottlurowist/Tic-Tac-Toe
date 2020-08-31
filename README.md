@@ -27,6 +27,17 @@ of the player's moves, updates the game board, and scores each move.
 Due to my experience I was able to dsign in my head items such as the game logic. The ideas
 come to me when I am in "diffuse mode" as most good ideas do.
 
+Because I learned "to count" in Discrete Mathematics while earning my MS in Computer Scienece,
+I determined that there was 8 ways to win the game, and only a single way to tie, assuming that
+the user doesn't quit midgame. I also realized that a win cannot happen before the 5th move. So
+I added a small check to not brute forcefully check the game board until the game is at move 5
+or later. That is kind of overkill for this game, but that kind of thinking can mean much in a
+more real-word project.
+
+My friend Paul Muller build 3D virtual walkthroughs and such for a living. He created for me
+the graphical assets that I use in the game, such as the animated GIF on the homepage, and
+the graphics for the gameboard itself.
+
 I decided to focus on meeting the minimum requirements with no issues rather than try to
 create fancy features with bugs in the final product. In the real world, that is what counts.
 
