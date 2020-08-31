@@ -87,7 +87,7 @@ const checkBoardForWin = (firstCellIndex, secondCellIndex, thirdCellIndex) => {
 
       // Update the status area.
       $("#status-notification-message-area")
-        .text(`Player ${currentPlayer} wins in ${numberOfMoves} moves!`); 
+        .text(`Player --- ${currentPlayer.toUpperCase()} --- wins in ${numberOfMoves} moves!`); 
 
       return true;
     }
@@ -262,14 +262,16 @@ const updateGameStatus = (game, wasUpdateSuccessful) => {
    }
 
    // Clone one of our hidden X and O images and attach to the board cell.
-   $(`#gameboard-images-cache ${imageName}`).clone().appendTo($(currentEventTarget)); 
+   $(`#gameboard-images-cache ${imageName}`).clone()
+                                            .appendTo($(currentEventTarget)); 
 
    // Now we need to show the hidden, cloned image.
-   $(currentEventTarget).children("img").css("display", "inline");
+   $(currentEventTarget).children("img")
+                        .css("display", "inline");
 
    if (!isGameWon) {
      $("#status-notification-message-area")
-      .text(`Player ${currentPlayer} to cell ${currentCellNumberClicked}.`);
+      .text(`Player --- ${currentPlayer.toUpperCase()} --- to cell ${currentCellNumberClicked}.`);
    }
 
    // Switch player X to O, or O to X.
