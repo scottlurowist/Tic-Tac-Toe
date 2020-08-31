@@ -3,9 +3,9 @@
 // pageStateMachine.js
 //
 // This file acts as a pseudo-state machine to centrally manage the various 
-// pages in the SPA. Frameworks such as Angular and React.js manage this 
-// for us. Central management of the pages keeps the rest of the code simpler
-// and allows us to be DRY.
+// pages, inputs, buttons, etc. in the SPA. Frameworks such as Angular and
+// React.js manage this for us. Central management of the pages keeps the rest
+// of the code simpler and allows us to be DRY.
 //
 ////////////////////////////////////////////////////////////////////////////////
 
@@ -28,6 +28,10 @@ const pageStates = {
 // Cache the DOM queries. These are not exposed to the rest of the app.
 const homePageJQuerySelector = $('#home-page');
 const signUpPageJQuerySelector = $('#sign-up-page-form');
+const signUpPageEmailJQuerySelector = $('#sign-up-email');
+const signUpPagePasswordJQuerySelector = $('#sign-up-password');
+const signUpPagePasswordConfirmationJQuerySelector = $('#sign-up-password_confirmation');
+const signUpPageCreateButtonJQuerySelector = $('#sign-up-page-form .btn');
 const signInPageJQuerySelector = $('#sign-in-page-form');
 const gameOptionsPageJQuerySelector = $('#game-options-page-form');
 const changePasswordPageJQuerySelector = $('#change-password-page-form');
@@ -69,8 +73,38 @@ const transitionToState = (nextState) => {
         privatePageStatesMap[currentPageInfo].hide();
     }
 
+    initializeSignupPage();
+
     privatePageStatesMap[nextState].show();
 }
+
+// Clears the form elements and hides the signup button for the 
+// signup page.
+const initializeSignupPage = () => {
+
+    signUpPageEmailJQuerySelector.val('');
+    signUpPagePasswordJQuerySelector.val('');    
+    signUpPagePasswordConfirmationJQuerySelector.val('');
+    
+    signUpPageCreateButtonJQuerySelector.hide();
+}
+
+
+// Enable the signup button only when the email,
+// password, and password confirmation input fields are not empty.
+const isTimeToShowSignupButton = () => {
+    if ((signUpPageEmailJQuerySelector.val() !== '') &&
+        (signUpPagePasswordJQuerySelector.val() !== '') &&
+        (signUpPagePasswordConfirmationJQuerySelector.val() !== '')) {
+
+            signUpPageCreateButtonJQuerySelector.show();
+        }
+}
+
+// Event handlers for the blur event for the input fields for the signup page.
+signUpPageEmailJQuerySelector.blur(isTimeToShowSignupButton); 
+signUpPagePasswordJQuerySelector.blur(isTimeToShowSignupButton); 
+signUpPagePasswordConfirmationJQuerySelector.blur(isTimeToShowSignupButton); 
 
 
 module.exports = {
