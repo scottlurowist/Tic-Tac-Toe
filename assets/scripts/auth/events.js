@@ -107,6 +107,18 @@ const onUpdateGame = (gameId, index, value, isGameOver) => {
 }
 
 
+// This event is triggered when the user has requested to get a
+// history of their games. It will invoke the web service that gets games. 
+const onGetGames = () => {
+
+    event.preventDefault();
+    
+    api.getGames()
+        .then(ui.onGetGamesSuccess)
+        .catch(ui.onGetGamesFailure);
+}
+
+
 // This event is triggered when the user has either won,
 // lost, or tied a game, and this will simply return the user to
 // the Game Options page. From there the user may select what they
@@ -141,6 +153,7 @@ module.exports = {
     onChangePassword: onChangePassword,
     onNewGame: onNewGame,
     onUpdateGame: onUpdateGame,
+    onGetGames: onGetGames,
     onReturnToGameOptionsFromNewGame: onReturnToGameOptionsFromNewGame,
     onExitApp: onExitApp
 }
