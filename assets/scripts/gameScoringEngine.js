@@ -201,8 +201,6 @@ const processCurrentMove = event => {
     // was selected.
     currentCellNumberClicked = event.target.id[event.target.id.length - 1];
 
-    $('#status-notification-message-area').text('');
-
     // Did the user select a cell that has already been played?
     if ((event.target.className === "x-image") ||
         (event.target.className === "o-image")) {
