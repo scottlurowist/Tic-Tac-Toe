@@ -76,7 +76,10 @@ the graphics for the gameboard itself.
 In the end I decided to focus on meeting the minimum requirements with no issues rather than
 try to create fancy features with bugs. I wanted to translate the game into Russian because I 
 speak Russian, but I thought I would end up rushing to finish. In the real world, giving the
-requirements manager what they want is what counts.
+requirements manager what they want is what counts. I also decided not to do a responsive 
+design until I am satified for how the app looks at full fidelity.
+
+***
 
 ### User Stories
 
@@ -90,31 +93,40 @@ requirements manager what they want is what counts.
 - As a player who has played games, I want to see a count of the number of games that I played so that
   I can determine whether I have a life.
 
+***
 
 ### Technologies Directly Used
 
+- JavaScript
 - jQuery
 - HTML/CSS/SCSS
-- Bootstrap
-- Javascript
+- Bootstrap 4 (forms, gameboard, buttons)
 - Grunt / Webpack
 
+***
 
 ### Unsolved Problems
 
 - I have no usolved problems based upon the requirements.
 
+***
+
 ### Nice-to-haves
-- Improve the styling including enabling responsive design.
-- Translate the text of the game into other languages.
+- Improve the styling including support for responsive design.
+- Translate the text of the game into other languages since my main
+- interests outside of tech is linguistics and language.
 - Improve the psuedo-state machine.
 - Improve the game engine to eliminate CommonJS circular dependencies.
+- Validate user input; this was not a requirement.
 - Use JS classes.
 - Eliminate magic numbers and strings.
+- Improve comments.
 - Check for connection before invoking web services. The app hangs if
   I disconnect my WiFi.
 - Make the status / notification area its own class or module. Then it could
   worry about writing info versus error messages, change font colors, etc.  
+  
+***
 
 #### Wireframes:
 ![Home Page](./scott-design/Wireframes/1-Tic-Tac_Toe-Signup-Signin.png)
