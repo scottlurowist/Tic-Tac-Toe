@@ -214,46 +214,50 @@ const isThereAWinOrTie = () => {
 // has won or tied so that the web service may be properly informed.
 const processCurrentMove = event => {
 
-    // Each board cell's ID terminates with the cell #. Simply
-    // extract it from the ID so that the game engine knows what
-    // was selected.
-    currentCellNumberClicked = event.target.id[event.target.id.length - 1];
+  // Once a game is won, don't allow the user to click on any cells until
+  // a new game is selected.
+  if (isGameWon) return;
 
-    // Did the user select a cell that has already been played?
-    if ((event.target.className === "x-image") ||
-        (event.target.className === "o-image")) {
-      $('#status-notification-message-area')
-      .text('You cannot select a cell already played. Try again.');
+  // Each board cell's ID terminates with the cell #. Simply
+  // extract it from the ID so that the game engine knows what
+  // was selected.
+  currentCellNumberClicked = event.target.id[event.target.id.length - 1];
 
-      return;
-    }
+  // Did the user select a cell that has already been played?
+  if ((event.target.className === "x-image") ||
+      (event.target.className === "o-image")) {
+    $('#status-notification-message-area')
+    .text('You cannot select a cell already played. Try again.');
 
-    if (currentGame.cells[currentCellNumberClicked] === "x"||
-        currentGame.cells[currentCellNumberClicked] === "o") {
+    return;
+  }
 
-          $('#status-notification-message-area')
-          .text('You cannot select a cell already played. Try again.');
-    
-          return;
-    }
+  if (currentGame.cells[currentCellNumberClicked] === "x"||
+      currentGame.cells[currentCellNumberClicked] === "o") {
 
-    // Save the board cell clicked for processing in updateGameStatus.
-    currentEventTarget = event.target;
+        $('#status-notification-message-area')
+        .text('You cannot select a cell already played. Try again.');
+  
+        return;
+  }
 
-    // Update the game board for scoring purposes.
-    currentGame.cells[currentCellNumberClicked] = currentPlayer;
+  // Save the board cell clicked for processing in updateGameStatus.
+  currentEventTarget = event.target;
 
-   // Update the move of the game.
-   numberOfMoves++;
+  // Update the game board for scoring purposes.
+  currentGame.cells[currentCellNumberClicked] = currentPlayer;
 
-   isGameWon = isThereAWinOrTie();
+  // Update the move of the game.
+  numberOfMoves++;
 
-    return {
-      id: currentGame._id,
-      index: parseInt(currentCellNumberClicked),
-      value: currentPlayer,
-      isGameComplete: isGameWon
-    }
+  isGameWon = isThereAWinOrTie();
+
+  return {
+    id: currentGame._id,
+    index: parseInt(currentCellNumberClicked),
+    value: currentPlayer,
+    isGameComplete: isGameWon
+  }
 }
 
 
