@@ -62,7 +62,12 @@ I determined that there is 8 ways to win the game, and only a single way to tie,
 the user doesn't quit midgame. I also realized that a win cannot happen before the 5th move. So
 I added a small check to not brute forcefully check the game board until the game is at move 5
 or later. That is kind of overkill for this game, but that kind of thinking can mean much in a
-real-word project.
+real-word project. 
+
+Due to my ability to count, it is possible for the first player to win two ways on the
+last move. Note that through naive game play, X can win on the last move by placing X in one of
+the corners and winning by having Xs in either diagonal, as well as having having X's in the
+top or bottom row, or the left or right columns. My scoring algorithm will detect that.
 
 My friend Paul Muller builds 3D virtual walkthroughs and such for a living. He created for me
 the graphical assets that I use in the game, such as the animated GIF on the homepage, and
@@ -100,10 +105,10 @@ requirements manager what they want is what counts.
 - I have no usolved problems based upon the requirements.
 
 ### Nice-to-haves
+- Improve the styling including enabling responsive design.
 - Translate the text of the game into other languages.
-- Simplify the scoring logic.
 - Improve the psuedo-state machine.
-- Improve the game engines to eliminate CommonJS circular dependencies.
+- Improve the game engine to eliminate CommonJS circular dependencies.
 - Use JS classes.
 - Eliminate magic numbers and strings.
 - Check for connection before invoking web services. The app hangs if

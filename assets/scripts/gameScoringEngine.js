@@ -42,7 +42,7 @@ const initializeGameEngine = game => {
     isGameWon = false;    
 
     // Reset the game board from possible previous games. Clear the background
-    // color to white and remove any possible X and O images.
+    // color to white and remove any X and O images.
     boardIds.forEach(boardCell => {
 
       $(boardCell).attr("style", "background: white;")
@@ -61,7 +61,23 @@ const toggleCurrentPlayer = () => {
 };
 
 
+// Animates a single, winning, gameboard cell.
+//  
+// index - the winning cell to animate, cells are 0-based.
+// timeDelay - the amount of time in milliseconds to delay the start
+// of the animation.
+const animateWinningGameCell = (index, timeDelay) => {
+
+  setTimeout(() => {
+    document.querySelector(`#gameboard-cell-${index}`)
+      .style.background = "yellow";
+  }, timeDelay);  
+}
+
+
 // Checks a collection of 3 gamboard cells for a win.
+//
+
 const checkBoardForWin = (firstCellIndex, secondCellIndex, thirdCellIndex) => {
 
   if (
@@ -70,20 +86,9 @@ const checkBoardForWin = (firstCellIndex, secondCellIndex, thirdCellIndex) => {
     currentGame.cells[firstCellIndex] !== ''
   ) {
       // Animate the winning row, column, or diagonal. 
-      setTimeout(() => {
-        document.querySelector(`#gameboard-cell-${firstCellIndex}`)
-          .style.background = "yellow";
-      }, 500);
-
-      setTimeout(() => {
-        document.querySelector(`#gameboard-cell-${secondCellIndex}`)
-          .style.background = "yellow";
-      }, 1000);
-
-      setTimeout(() => {
-        document.querySelector(`#gameboard-cell-${thirdCellIndex}`)
-          .style.background = "yellow";
-      }, 1500);
+      animateWinningGameCell(firstCellIndex, 500);
+      animateWinningGameCell(secondCellIndex, 1000);
+      animateWinningGameCell(thirdCellIndex, 1500);
 
       // Update the status area.
       $("#status-notification-message-area")
@@ -108,50 +113,63 @@ const checkForWin = () => {
 
   let isThereAWin = false;  
 
+  // Note that through naive game play, X can win on the last move
+  // by selecting X in one of the corners, winning by having Xs in
+  // either diagonal, and having X's in the top or bottom row, or
+  // the left or right columns. That is why we don't have "else if"
+  // statements; this lets us detect that edge case.
+  //
   // Use the transitive property of equality to check for a win.
   // First check the top row.
   if (checkBoardForWin(0, 1, 2)) {
 
     isThereAWin = true;    
   }
+  
   // Check the middle row.
-  else if (checkBoardForWin(3, 4, 5)) {
+  if (checkBoardForWin(3, 4, 5)) {
      
     isThereAWin = true;       
   }
+  
   // Check the bottom row.
-  else if (checkBoardForWin(6, 7, 8)) {
+  if (checkBoardForWin(6, 7, 8)) {
 
     isThereAWin = true;    
   }
+  
   // Check the left column.
-  else if (checkBoardForWin(0, 3, 6)) {
+  if (checkBoardForWin(0, 3, 6)) {
 
     isThereAWin = true;      
   }
+  
   // Check the middle column.
-  else if (checkBoardForWin(1, 4, 7)) {
+  if (checkBoardForWin(1, 4, 7)) {
         
     isThereAWin = true;            
   }
+  
   // Check the right column.
-  else if (checkBoardForWin(2, 5, 8)) {
+  if (checkBoardForWin(2, 5, 8)) {
 
     isThereAWin = true;                    
   } 
+
   // Check the top left to bottom right diagonol.
-  else if (checkBoardForWin(0, 4, 8)) {
+  if (checkBoardForWin(0, 4, 8)) {
 
     isThereAWin = true;                     
   }  
+  
   // Check the bottom left to top right diagonol.
-  else if (checkBoardForWin(6, 4, 2)) {
+  if (checkBoardForWin(6, 4, 2)) {
 
     isThereAWin = true;                     
   }
 
+  // The game is over so show our nav buttons.
   if (isThereAWin) {
-      
     $('#new-game-return-to-game-options').show();
     $('#new-game-within-game-board-button').show();  
   }
