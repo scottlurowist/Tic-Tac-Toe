@@ -113,6 +113,7 @@ at full fidelity.
 - jQuery
 - HTML/CSS/SCSS
 - Bootstrap 4 (forms, gameboard, buttons)
+- Web services
 - Grunt / Webpack
 
 ***
