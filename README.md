@@ -128,6 +128,11 @@ at full fidelity.
 * Improve the styling including support for responsive design.
 * Translate the text of the game into other languages since my main
   interests outside of tech is linguistics and language.
+* Eliminate api.js, events.js, and apiPromiseHandlers.js. A cleaner design would be
+* to intergrate this functionality into "verticals" for better separation of concerns
+  and reusability. It would also allow the pseudo-state machine to be more powerful
+  by managing state transitions without the various screens telling the pseudo-state
+  machine where to go for the next page.
 * Write automated unit tests using a framework such as Jest.
 * Write automated UI tests using Selenium.
 * Improve the psuedo-state machine.
